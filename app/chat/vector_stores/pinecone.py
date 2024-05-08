@@ -12,7 +12,8 @@ vector_store = Pinecone.from_existing_index(
 
 def build_retriever(chatargs):
     search_kwargs= {
-        "filter": {"pdf_id": chatargs.pdf_id}
+        "filter": {"pdf_id": chatargs.pdf_id},
+        "k": 3
         }
     return vector_store.as_retriever(
         search_kwargs=search_kwargs

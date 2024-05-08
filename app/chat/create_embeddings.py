@@ -6,7 +6,7 @@ from app.chat.vector_stores.pinecone import vector_store
 def create_embeddings_for_pdf(pdf_id: str, pdf_path: str):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
-        chunk_overlap=100,
+        chunk_overlap=50,
     )
     loader = PyPDFLoader(pdf_path)
     docs = loader.load_and_split(text_splitter)
@@ -20,16 +20,6 @@ def create_embeddings_for_pdf(pdf_id: str, pdf_path: str):
 
     vector_store.add_documents(docs) 
 
-def create_embedings_for_html(html_path: str):
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=100,
-    )
-    loader = UnstructuredHTMLLoader(html_path)
-
-    docs = loader.load_and_split(text_splitter)
-    for doc in docs:
-        print(doc)
 
     """
     Generate and store embeddings for the given pdf
